@@ -11,7 +11,7 @@ export class AppRoot {
       <div class="app-root">
         <header>
           <h1>Web App Poem Demo</h1>
-          <stencil-route-link url="/profile/stencil">
+          <stencil-route-link url="/about">
             <button>About This</button>
           </stencil-route-link>
         </header>
@@ -20,7 +20,7 @@ export class AppRoot {
           <stencil-router>
             <stencil-route-switch scrollTopOffset={0}>
               <stencil-route url="/" component="app-home" exact={true} />
-              <stencil-route url="/profile/:name" component="app-profile" />
+              <stencil-route url="/about" component="app-about" />
             </stencil-route-switch>
           </stencil-router>
         </main>

@@ -14,5 +14,8 @@
     "@stencil/core": "^2.0.0",
     "@stencil/router": "^1.0.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^7.21.0"
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h, Prop, State } from '@stencil/core';
 import { data } from '../../data/sample';
 
 @Component({
@@ -8,7 +8,27 @@ import { data } from '../../data/sample';
 })
 export class AppHome {
   
+  @Prop() db:any;
   @State() lines:any[] = data.lines ? data.lines : [];
+
+  componentDidLoad() {
+    console.log(`i loaded with db:`, this.db);
+    
+    if (this.db) {
+      // fetch our poem
+      const poemRef = this.db.collection("poem");
+      let dbLines = [];
+      poemRef.get().then(snapshot => {
+        snapshot.forEach(doc => {
+          console.log(`i have this line:`, doc.data());
+          dbLines.push(doc.data());
+        })
+        console.log("db lines!", dbLines);
+        this.lines = [...this.lines, ...dbLines];
+      });
+    }
+    
+  }
 
   renderLine(line: any) {
     return (

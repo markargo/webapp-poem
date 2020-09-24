@@ -1,4 +1,5 @@
 import { Component, h } from '@stencil/core';
+import { data } from '../../data/sample';
 
 @Component({
   tag: 'app-home',
@@ -6,17 +7,25 @@ import { Component, h } from '@stencil/core';
   shadow: true,
 })
 export class AppHome {
+  
+  private lines:any[] = data.lines ? data.lines : [];
+
+  renderLine(line: any) {
+    return (
+      <div class="line">{ line.text }</div>
+    );
+  }
+
   render() {
     return (
       <div class="app-home">
-        <p>
-          Welcome to the Stencil App Starter. You can use this starter to build entire apps all with web components using Stencil! Check out our docs on{' '}
-          <a href="https://stenciljs.com">stenciljs.com</a> to get started.
-        </p>
-
-        <stencil-route-link url="/profile/stencil">
-          <button>Profile page</button>
-        </stencil-route-link>
+        <div class="poem">
+        { 
+          this.lines.map((line)=>{
+            return this.renderLine(line);
+          })
+        }
+        </div>
       </div>
     );
   }

@@ -20,7 +20,9 @@ export class AppProfile {
     if (this.match && this.match.params.name) {
       return (
         <div class="app-profile">
-          <p>Hello! My name is {this.normalize(this.match.params.name)}. My name was passed in through a route param!</p>
+          <div class="info">
+            This is a demo project to learn how to make a very basic web app!
+          </div>
         </div>
       );
     }

@@ -8,9 +8,12 @@ import { Component, h } from '@stencil/core';
 export class AppRoot {
   render() {
     return (
-      <div>
+      <div class="app-root">
         <header>
-          <h1>Stencil App Starter</h1>
+          <h1>Web App Poem Demo</h1>
+          <stencil-route-link url="/profile/stencil">
+            <button>About This</button>
+          </stencil-route-link>
         </header>
 
         <main>

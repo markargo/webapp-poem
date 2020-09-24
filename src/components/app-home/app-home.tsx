@@ -16,6 +16,16 @@ export class AppHome {
     );
   }
 
+  buttonClicked(event) {
+    const input = event.path[1].querySelector('input');
+    const line = input.value;
+    console.log(`got ${line} from:`, input);
+    if (line.length > 0) {
+      this.lines.push({ text:line });
+    }
+    console.log(`now I have these lines:`, this.lines);
+  }
+
   render() {
     return (
       <div class="app-home">
@@ -25,6 +35,10 @@ export class AppHome {
             return this.renderLine(line);
           })
         }
+          <div class="line-input">
+            <input type="text" placeholder="enter the next line..."></input>
+            <button onClick={ this.buttonClicked.bind(this) }>add</button>
+          </div>
         </div>
       </div>
     );

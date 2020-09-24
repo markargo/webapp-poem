@@ -20,3 +20,44 @@
   font-weight: 700;
   font-size: 18px;
 }
+
+.line-input {
+  margin-top: 20px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  width: calc(100% - 30px);
+  background-color: rgba(255, 255, 255, 0.35);
+  border: none;
+  box-shadow: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  color: purple;
+}
+
+input:focus {
+  outline: 0;
+}
+
+button {
+  margin-left: 20px;
+  border: none;
+  box-shadow: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: purple;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+button:hover {
+  background-color: white;
+  color: purple;
+}

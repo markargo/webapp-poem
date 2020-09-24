@@ -12,20 +12,24 @@ export class AppHome {
   @State() lines:any[] = data.lines ? data.lines : [];
 
   componentDidLoad() {
-    console.log(`i loaded with db:`, this.db);
-    
     if (this.db) {
-      // fetch our poem
+      // fetch our poem collection
       const poemRef = this.db.collection("poem");
-      let dbLines = [];
-      poemRef.get().then(snapshot => {
+
+      // listen for changes
+      poemRef.onSnapshot((snapshot) => {
+        let lines = [];
         snapshot.forEach(doc => {
-          console.log(`i have this line:`, doc.data());
-          dbLines.push(doc.data());
+          lines.push(doc.data());
         })
-        console.log("db lines!", dbLines);
-        this.lines = [...this.lines, ...dbLines];
+        this.lines = lines;
       });
+
+      // query our collection
+      poemRef.get();
+    }
+    else {
+      console.error(`no database! cannot do it!`);
     }
     
   }
@@ -37,13 +41,15 @@ export class AppHome {
   }
 
   buttonClicked(event) {
-    const input = event.path[1].querySelector('input');
+    // grab our line value
+    const input = event.composedPath()[1].querySelector('input');
     const line = input.value;
-    console.log(`got ${line} from:`, input);
-    if (line.length > 0) {
-      this.lines = [...this.lines, { text:line }];
-    }
-    console.log(`now I have these lines:`, this.lines);
+    // add the line to firebase    
+    const poemRef = this.db.collection("poem");
+    const lineData = { text: line };
+    // create an empty document
+    const newLineRef = poemRef.doc();
+    newLineRef.set(lineData);
   }
 
   render() {

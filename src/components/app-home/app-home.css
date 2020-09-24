@@ -61,3 +61,16 @@ button:hover {
   background-color: white;
   color: purple;
 }
+
+.clear {
+  margin-top: 10px;
+  font-size: 10px;
+  text-decoration: underline;
+}
+
+.clear:hover {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+}

@@ -21,8 +21,15 @@ export class AppHome {
         let lines = [];
         snapshot.forEach(doc => {
           lines.push(doc.data());
-        })
-        this.lines = lines;
+        });
+        // set sorted lines
+        this.lines = lines.sort((a, b)=>{
+          if (a.timestamp === undefined) return -1;
+          if (a.timestamp > b.timestamp) return 1;
+          else if(a.timestamp < b.timestamp) return -1;
+          else return 0;          
+        });
+        console.log(this.lines);
       });
 
       // query our collection
@@ -46,10 +53,18 @@ export class AppHome {
     const line = input.value;
     // add the line to firebase    
     const poemRef = this.db.collection("poem");
-    const lineData = { text: line };
-    // create an empty document
-    const newLineRef = poemRef.doc();
-    newLineRef.set(lineData);
+    poemRef.add( { text: line, timestamp: Date.now() } );
+  }
+
+  clearClicked(event) {
+    console.log(`clear clicked!`);
+    // clear our documents
+    const poemRef = this.db.collection("poem");
+    poemRef.get().then(snapshot => {
+      snapshot.forEach(doc => {
+        doc.ref.delete();
+      });
+    });
   }
 
   render() {
@@ -66,6 +81,7 @@ export class AppHome {
             <button onClick={ this.buttonClicked.bind(this) }>add</button>
           </div>
         </div>
+        <div class="clear" onClick={ this.clearClicked.bind(this) }>clear poem</div>
       </div>
     );
   }

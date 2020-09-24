@@ -2,7 +2,6 @@ import { Component, h, State } from '@stencil/core';
 
 import * as firebase from 'firebase/app';
 import "firebase/firestore";
-import * as firebaseui from 'firebaseui';
 import { firebaseConfig } from '../../data/firebase';
 
 @Component({
@@ -13,14 +12,12 @@ import { firebaseConfig } from '../../data/firebase';
 export class AppRoot {
 
   private db;
-  private ui;
   @State() user;
 
   componentWillLoad() {
     if (firebase) {
       firebase.initializeApp(firebaseConfig);
       this.db = firebase.firestore();
-      this.ui = new firebaseui.auth.AuthUI(firebase.auth());
 
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {

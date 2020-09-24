@@ -9,6 +9,7 @@ import { data } from '../../data/sample';
 export class AppHome {
   
   @Prop() db:any;
+  @Prop() user:any;
   @State() lines:any[] = data.lines ? data.lines : [];
 
   componentDidLoad() {
@@ -53,7 +54,11 @@ export class AppHome {
     const line = input.value;
     // add the line to firebase    
     const poemRef = this.db.collection("poem");
-    poemRef.add( { text: line, timestamp: Date.now() } );
+    let data = { text: line, timestamp: Date.now() };
+    if (this.user) {
+      data['uid'] = this.user.uid;
+    }
+    poemRef.add( data );
   }
 
   clearClicked(event) {

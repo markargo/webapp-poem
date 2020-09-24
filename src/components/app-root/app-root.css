@@ -42,3 +42,17 @@ button {
 button:hover {
   transform: scale(1.2);
 }
+
+.auth {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  max-width: 300px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.auth:hover {
+  color: white;
+  text-decoration: none;
+}

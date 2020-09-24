@@ -10,6 +10,7 @@ export namespace Components {
     }
     interface AppHome {
         "db": any;
+        "user": any;
     }
     interface AppRoot {
     }
@@ -44,6 +45,7 @@ declare namespace LocalJSX {
     }
     interface AppHome {
         "db"?: any;
+        "user"?: any;
     }
     interface AppRoot {
     }

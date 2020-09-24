@@ -1,4 +1,4 @@
-import { Component, h } from '@stencil/core';
+import { Component, h, State } from '@stencil/core';
 import { data } from '../../data/sample';
 
 @Component({
@@ -8,7 +8,7 @@ import { data } from '../../data/sample';
 })
 export class AppHome {
   
-  private lines:any[] = data.lines ? data.lines : [];
+  @State() lines:any[] = data.lines ? data.lines : [];
 
   renderLine(line: any) {
     return (
@@ -21,7 +21,7 @@ export class AppHome {
     const line = input.value;
     console.log(`got ${line} from:`, input);
     if (line.length > 0) {
-      this.lines.push({ text:line });
+      this.lines = [...this.lines, { text:line }];
     }
     console.log(`now I have these lines:`, this.lines);
   }
